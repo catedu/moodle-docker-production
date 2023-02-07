@@ -48,7 +48,7 @@ RUN { \
 
 
 RUN	echo "Installing moodle"; \
-	curl -o moodle.tgz -fSL "https://download.moodle.org/download.php/direct/stable400/moodle-${VERSION}.tgz"; \
+	curl -o moodle.tgz -fSL "https://download.moodle.org/download.php/direct/stable401/moodle-${VERSION}.tgz"; \
 	mkdir /usr/src/moodle; \
 	tar -xf moodle.tgz -C /usr/src/moodle --strip 1; \
 	rm moodle.tgz
