@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Publish to Registry
-        uses: elgohr/Publish-Docker-Github-Action@master
+        uses: elgohr/Publish-Docker-Github-Action@v4
         with:
           name: cateduac/moodle
           username: ${{ secrets.DOCKER_HUB_USER }}
