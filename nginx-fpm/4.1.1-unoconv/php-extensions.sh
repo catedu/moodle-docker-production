@@ -53,9 +53,8 @@ docker-php-ext-install -j$(nproc) \
     pgsql \
     soap \
     xsl \
-    # xmlrpc \
     sockets # faster than tcp for communnication with nginx
-
+    # xmlrpc \
 # GD.
 docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 docker-php-ext-install -j$(nproc) gd
