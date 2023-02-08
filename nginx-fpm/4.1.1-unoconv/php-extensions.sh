@@ -2,7 +2,7 @@
 
 set -e
 
-echo "Installing apt dependencies:"
+echo "***** Installing apt dependencies:"
 
 # Build packages will be added during the build, but will be removed at the end.
 BUILD_PACKAGES="gettext gnupg libcurl4-openssl-dev libfreetype6-dev libicu-dev libjpeg62-turbo-dev \
@@ -41,11 +41,11 @@ apt-get install -y --no-install-recommends apt-transport-https \
 
 
 # Generate the locales configuration
-echo 'Generating locales..'
+echo '***** Generating locales..'
 echo 'es_ES.UTF-8 UTF-8' > /etc/locale.gen
 locale-gen
 
-echo "Installing php extensions"
+echo "***** Installing php extensions"
 docker-php-ext-install -j$(nproc) \
     intl \
     mysqli \
@@ -55,27 +55,35 @@ docker-php-ext-install -j$(nproc) \
     xsl \
     sockets # faster than tcp for communnication with nginx
     # xmlrpc \
+
 # GD.
+echo "***** Installing GD"
 docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 docker-php-ext-install -j$(nproc) gd
 
 # LDAP.
+echo "***** Installing LDAP"
 docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/
 docker-php-ext-install -j$(nproc) ldap
 
 # Memcached, MongoDB, Redis, APCu, igbinary.
+echo "***** Installing Memcached, MongoDB, Redis, APCu, igbinary"
 pecl install memcached mongodb redis apcu igbinary uuid
 docker-php-ext-enable memcached mongodb redis apcu igbinary uuid
 
 # ZIP
+echo "***** Installing ZIP"
 docker-php-ext-configure zip --with-libzip
 docker-php-ext-install zip
 
 echo 'apc.enable_cli = On' >> /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini
 
 # Keep our image size down..
+echo "***** Keep our image size down"
 pecl clear-cache
 apt-get remove --purge -y $BUILD_PACKAGES
 apt-get autoremove -y
 apt-get clean
 rm -rf /var/lib/apt/lists/*
+
+echo "***** All php-extensions.sh actions done"
