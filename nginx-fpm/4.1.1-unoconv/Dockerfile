@@ -1,4 +1,3 @@
-# php 7.4 not working yet, see https://tracker.moodle.org/browse/MDL-66260
 FROM php:7.4-fpm
 LABEL MAINTAINER juanda <juandacorreo@gmail.com>
 
