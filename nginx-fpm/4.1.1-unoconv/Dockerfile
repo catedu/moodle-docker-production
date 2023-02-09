@@ -67,8 +67,7 @@ RUN	echo "Installing composer"; \
 RUN echo "Installing moosh"; \
 	cd /usr/src; \
 	curl -o moosh.zip -fSL "https://moodle.org/plugins/download.php/28292/moosh_moodle41_2023010400.zip"; \
-	mkdir /usr/src/moosh; \
-	unzip moosh.zip -d /usr/src/moosh; \
+	unzip moosh.zip; \
 	ln -s /usr/src/moosh/moosh.php /usr/local/bin/moosh; \
 	rm moosh.zip
 
