@@ -1,4 +1,4 @@
-FROM php:8.1-fpm
+FROM php:7.4.33-fpm
 LABEL MAINTAINER juanda <juandacorreo@gmail.com>
 
 ARG VERSION=4.1.1
