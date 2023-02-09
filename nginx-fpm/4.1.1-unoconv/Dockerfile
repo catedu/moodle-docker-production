@@ -1,4 +1,4 @@
-FROM php:8.2.2-fpm
+FROM php:8.1-fpm
 LABEL MAINTAINER juanda <juandacorreo@gmail.com>
 
 ARG VERSION=4.1.1
@@ -66,10 +66,11 @@ RUN	echo "Installing composer"; \
 
 RUN echo "Installing moosh"; \
 	cd /usr/src; \
-	curl -o moosh.tar.gz -fSL "https://moodle.org/plugins/download.php/28292/moosh_moodle41_2023010400.zip"; \
-	tar -xf moosh.tar.gz -C /usr/src/moosh; \
+	curl -o moosh.zip -fSL "https://moodle.org/plugins/download.php/28292/moosh_moodle41_2023010400.zip"; \
+	mkdir /usr/src/moosh; \
+	unzip moosh.zip -d /usr/src/moosh; \
 	ln -s /usr/src/moosh/moosh.php /usr/local/bin/moosh; \
-	rm moosh.tar.gz
+	rm moosh.zip
 
 RUN	echo "Installing unoconv"; \
 	# apt-get update && apt-get install -y; \
