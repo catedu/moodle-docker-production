@@ -17,6 +17,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ## extensions based on https://github.com/moodlehq/moodle-php-apache/blob/master/Dockerfile
 # COPY libicu63_63.1-6+deb10u1_amd64.deb /tmp
 COPY php-extensions.sh /tmp
+# TODO: Valorar usar esto https://github.com/mlocati/docker-php-extension-installer para la instalación de extensiones
 RUN /tmp/php-extensions.sh
 
 # set recommended opcache settings 
@@ -57,19 +58,19 @@ RUN	echo "Installing composer"; \
 	chmod +x ./composer.phar; \
 	mv ./composer.phar /usr/local/bin/composer
 
-# RUN	echo "Installing moosh"; \ 
-# 	cd /usr/src; \
-# 	git clone https://github.com/tmuras/moosh.git; \ 
-# 	cd moosh; \
-# 	composer install; \
-# 	ln -s /usr/src/moosh/moosh.php /usr/local/bin/moosh
-
-RUN echo "Installing moosh"; \
+RUN	echo "Installing moosh"; \ 
 	cd /usr/src; \
-	curl -o moosh.zip -fSL "https://moodle.org/plugins/download.php/28292/moosh_moodle41_2023010400.zip"; \
-	unzip moosh.zip; \
-	ln -s /usr/src/moosh/moosh.php /usr/local/bin/moosh; \
-	rm moosh.zip
+	git clone https://github.com/tmuras/moosh.git; \ 
+	cd moosh; \
+	composer install; \
+	ln -s /usr/src/moosh/moosh.php /usr/local/bin/moosh
+
+# RUN echo "Installing moosh"; \
+# 	cd /usr/src; \
+# 	curl -o moosh.zip -fSL "https://moodle.org/plugins/download.php/28292/moosh_moodle41_2023010400.zip"; \
+# 	unzip moosh.zip; \
+# 	ln -s /usr/src/moosh/moosh.php /usr/local/bin/moosh; \
+# 	rm moosh.zip
 
 RUN	echo "Installing unoconv"; \
 	# apt-get update && apt-get install -y; \
