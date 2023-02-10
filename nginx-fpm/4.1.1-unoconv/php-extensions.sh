@@ -53,8 +53,8 @@ docker-php-ext-install -j$(nproc) \
     pgsql \
     soap \
     xsl \
+    xmlrpc \
     sockets # faster than tcp for communnication with nginx
-    # xmlrpc \
 
 # GD.
 echo "***** Installing GD"
@@ -74,7 +74,7 @@ docker-php-ext-enable memcached mongodb redis apcu igbinary uuid
 
 # ZIP
 echo "***** Installing ZIP"
-# docker-php-ext-configure zip --with-libzip
+docker-php-ext-configure zip --with-libzip
 docker-php-ext-install zip
 
 echo 'apc.enable_cli = On' >> /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini
