@@ -23,13 +23,13 @@ RUN /tmp/php-extensions.sh
 
 # set recommended opcache settings 
 # see https://www.php.net/manual/en/opcache.installation.php
-## see https://docs.moodle.org/39/en/OPcache
+## see https://docs.moodle.org/401/en/OPcache
 RUN { \
 	echo 'opcache.memory_consumption=1024'; \
 	echo 'opcache.interned_strings_buffer=8'; \
 	echo 'opcache.max_accelerated_files=10000'; \
 	echo 'opcache.revalidate_freq=60'; \
-	echo 'opcache.fast_shutdown=1'; \
+	# opcache.fast_shutdown=1 ; prior to PHP 7.2.0 echo 'opcache.fast_shutdown=1'; \
 	echo 'opcache.enable_cli=1'; \
 	echo 'opcache.use_cwd=1'; \
 	echo 'opcache.validate_timestamps = 1'; \
