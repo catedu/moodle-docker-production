@@ -74,7 +74,7 @@ docker-php-ext-enable memcached mongodb redis apcu igbinary uuid
 
 # ZIP
 echo "***** Installing ZIP"
-docker-php-ext-configure zip --with-libzip
+# docker-php-ext-configure zip --with-libzip # https://stackoverflow.com/questions/65513366/docker-php-adding-zip-extension
 docker-php-ext-install zip
 
 echo 'apc.enable_cli = On' >> /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini
