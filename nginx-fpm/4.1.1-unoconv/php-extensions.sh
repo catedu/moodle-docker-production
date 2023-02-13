@@ -53,9 +53,9 @@ docker-php-ext-install -j$(nproc) \
     pgsql \
     soap \
     xsl \
+    sockets # faster than tcp for communnication with nginx
     # https://php.watch/versions/8.0/xmlrpc PHP 8.0: XMLRPC extension is moved to PECL
     # xmlrpc \
-    sockets # faster than tcp for communnication with nginx
 
 # GD.
 echo "***** Installing GD"
