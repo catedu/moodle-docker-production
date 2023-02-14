@@ -73,7 +73,7 @@ RUN	echo "Installing moosh"; \
 	cd moosh; \
 	composer install; \
 	ln -s /usr/src/moosh/moosh.php /usr/local/bin/moosh; \
-	rm moosh.zip
+	rm ../moosh.zip
 
 RUN	echo "Installing unoconv"; \
 	# apt-get update && apt-get install -y; \
