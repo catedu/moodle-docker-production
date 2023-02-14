@@ -46,7 +46,7 @@ echo 'es_ES.UTF-8 UTF-8' > /etc/locale.gen
 locale-gen
 
 echo "***** Installing php extensions"
-# TODO: PHP Extensions and libraries https://docs.moodle.org/401/en/PHP
+# TODO: Revisar las extensiones que hacen falta para Moodle 4.x PHP Extensions and libraries https://docs.moodle.org/401/en/PHP
 docker-php-ext-install -j$(nproc) \
     intl \
     mysqli \
@@ -54,6 +54,7 @@ docker-php-ext-install -j$(nproc) \
     pgsql \
     soap \
     xsl \
+    exif \
     sockets # faster than tcp for communnication with nginx
     # https://php.watch/versions/8.0/xmlrpc PHP 8.0: XMLRPC extension is moved to PECL
     # xmlrpc \
