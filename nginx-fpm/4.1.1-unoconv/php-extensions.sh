@@ -46,6 +46,7 @@ echo 'es_ES.UTF-8 UTF-8' > /etc/locale.gen
 locale-gen
 
 echo "***** Installing php extensions"
+# TODO: PHP Extensions and libraries https://docs.moodle.org/401/en/PHP
 docker-php-ext-install -j$(nproc) \
     intl \
     mysqli \
@@ -68,6 +69,7 @@ docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/
 docker-php-ext-install -j$(nproc) ldap
 
 # Memcached, MongoDB, Redis, APCu, igbinary.
+# TODO: Por qué instarlar MongoDB si usamos mariaDB ?
 echo "***** Installing Memcached, MongoDB, Redis, APCu, igbinary"
 pecl install memcached mongodb redis apcu igbinary uuid
 docker-php-ext-enable memcached mongodb redis apcu igbinary uuid
