@@ -59,12 +59,21 @@ RUN	echo "Installing composer"; \
 	chmod +x ./composer.phar; \
 	mv ./composer.phar /usr/local/bin/composer
 
+# RUN	echo "Installing moosh"; \
+# 	cd /usr/src; \
+# 	git clone https://github.com/tmuras/moosh.git; \
+# 	cd moosh; \
+# 	composer install; \
+# 	ln -s /usr/src/moosh/moosh.php /usr/local/bin/moosh
+
 RUN	echo "Installing moosh"; \
 	cd /usr/src; \
-	git clone https://github.com/tmuras/moosh.git; \
+	curl -o moosh.zip -fSL "https://moodle.org/plugins/download.php/28292/moosh_moodle41_2023010400.zip"; \
+	unzip moosh.zip; \
 	cd moosh; \
 	composer install; \
-	ln -s /usr/src/moosh/moosh.php /usr/local/bin/moosh
+	ln -s /usr/src/moosh/moosh.php /usr/local/bin/moosh; \
+	rm moosh.zip
 
 RUN	echo "Installing unoconv"; \
 	# apt-get update && apt-get install -y; \
