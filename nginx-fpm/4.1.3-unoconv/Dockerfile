@@ -1,5 +1,5 @@
-# php 7.4 not working yet, see https://tracker.moodle.org/browse/MDL-66260
-FROM php:7.4-fpm
+
+FROM php:8.0-fpm
 LABEL MAINTAINER juanda <juandacorreo@gmail.com>
 
 ARG VERSION=4.1.3
@@ -18,17 +18,18 @@ ARG DEBIAN_FRONTEND=noninteractive
 ## extensions based on https://github.com/moodlehq/moodle-php-apache/blob/master/Dockerfile
 # COPY libicu63_63.1-6+deb10u1_amd64.deb /tmp
 COPY php-extensions.sh /tmp
+# TODO: Valorar usar esto https://github.com/mlocati/docker-php-extension-installer para la instalación de extensiones
 RUN /tmp/php-extensions.sh
 
 # set recommended opcache settings 
 # see https://www.php.net/manual/en/opcache.installation.php
-## see https://docs.moodle.org/39/en/OPcache
+## see https://docs.moodle.org/401/en/OPcache
 RUN { \
 	echo 'opcache.memory_consumption=1024'; \
 	echo 'opcache.interned_strings_buffer=8'; \
 	echo 'opcache.max_accelerated_files=10000'; \
 	echo 'opcache.revalidate_freq=60'; \
-	echo 'opcache.fast_shutdown=1'; \
+	# opcache.fast_shutdown=1 ; prior to PHP 7.2.0 echo 'opcache.fast_shutdown=1'; \
 	echo 'opcache.enable_cli=1'; \
 	echo 'opcache.use_cwd=1'; \
 	echo 'opcache.validate_timestamps = 1'; \
@@ -58,12 +59,21 @@ RUN	echo "Installing composer"; \
 	chmod +x ./composer.phar; \
 	mv ./composer.phar /usr/local/bin/composer
 
+# RUN	echo "Installing moosh"; \
+# 	cd /usr/src; \
+# 	git clone https://github.com/tmuras/moosh.git; \
+# 	cd moosh; \
+# 	composer install; \
+# 	ln -s /usr/src/moosh/moosh.php /usr/local/bin/moosh
+
 RUN	echo "Installing moosh"; \
 	cd /usr/src; \
-	git clone https://github.com/tmuras/moosh.git; \ 
+	curl -o moosh.zip -fSL "https://moodle.org/plugins/download.php/28292/moosh_moodle41_2023010400.zip"; \
+	unzip moosh.zip; \
 	cd moosh; \
 	composer install; \
-	ln -s /usr/src/moosh/moosh.php /usr/local/bin/moosh
+	ln -s /usr/src/moosh/moosh.php /usr/local/bin/moosh; \
+	rm ../moosh.zip
 
 RUN	echo "Installing unoconv"; \
 	# apt-get update && apt-get install -y; \
@@ -76,7 +86,7 @@ RUN	echo "Installing unoconv"; \
 RUN	echo "Installing expect"; \
 	apt-get update; \
 	apt-get -y install expect
-	
+
 RUN curl -o dockerize.tar.gz -fSL "https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz"; \
 	tar -xf dockerize.tar.gz -C /usr/local/bin; \
 	rm dockerize.tar.gz

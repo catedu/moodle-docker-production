@@ -125,7 +125,7 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 		echo >&2 "MOODLE DATA DIRECTORY FOUND: SKIP CREATION"
 		# if the directory exists AND the permissions of it are root:root, let's chown it (likely a Docker-created directory)
 		if [ "$(id -u)" = '0' ] && [ "$(stat -c '%u:%g' $MOODLE_DATA)" = '0:0' ]; then
-		    echo >&2 "Changed permissions to Moodle Data directory"
+			echo >&2 "Changed permissions to Moodle Data directory"
 			chown -R "$user:$group" $MOODLE_DATA
 		fi
 	fi
