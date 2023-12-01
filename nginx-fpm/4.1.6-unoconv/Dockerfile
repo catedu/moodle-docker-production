@@ -3,7 +3,7 @@ FROM php:8.0-fpm
 LABEL MAINTAINER juanda <juandacorreo@gmail.com>
 
 ARG VERSION=4.1.6
-# ARG MOOSH_VERSION=0.36 varible not used, always latest moosh version.
+# ARG MOOH_VERSION=0.36 varible not used, always latest moosh version.
 ARG COMPOSER_VERSION=1.10.6
 ENV DOCKERIZE_VERSION v0.6.1
 
@@ -16,7 +16,6 @@ EXPOSE 80
 ARG DEBIAN_FRONTEND=noninteractive
 
 ## extensions based on https://github.com/moodlehq/moodle-php-apache/blob/master/Dockerfile
-# COPY libicu63_63.1-6+deb10u1_amd64.deb /tmp
 COPY php-extensions.sh /tmp
 # TODO: Valorar usar esto https://github.com/mlocati/docker-php-extension-installer para la instalación de extensiones
 RUN /tmp/php-extensions.sh
