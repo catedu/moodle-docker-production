@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Publish Docker 4.1.3-php-fpm-unoconv
+name: Publish Docker 4.1.6-php-fpm-unoconv
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -8,7 +8,7 @@ on:
   push:
     branches: [master]
     paths:
-      - "nginx-fpm/4.1.3-unoconv/**"
+      - "nginx-fpm/4.1.6-unoconv/**"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -25,5 +25,5 @@ jobs:
           name: cateduac/moodle
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-          context: "nginx-fpm/4.1.3-unoconv"
-          tags: "4.1.3-nginx-fpm-unoconv"
+          context: "nginx-fpm/4.1.6-unoconv"
+          tags: "4.1.6-nginx-fpm-unoconv"
