@@ -16,14 +16,14 @@ PACKAGES_POSTGRES="libpq5"
 PACKAGES_MYMARIA="libmariadb3 mariadb-client"
 
 # Packages for other Moodle runtime dependenices.
-PACKAGES_RUNTIME="ghostscript libaio1t64 libcurl4 libgss3 libicu74 libmcrypt-dev libxml2 libxslt1.1 \
+PACKAGES_RUNTIME="ghostscript libaio1t64 libcurl4 libgss3 libicu75 libmcrypt-dev libxml2 libxslt1.1 \
   libzip-dev locales sassc unixodbc unzip zip git sudo libsodium23"
 
 # Packages for Memcached.
 PACKAGES_MEMCACHED="libmemcached11 libmemcachedutil2"
 
 # Packages for LDAP.
-PACKAGES_LDAP="libldap-2.6-0"
+PACKAGES_LDAP="libldap-2.5-0t64"
 
 apt-get update
 apt-get install -y --no-install-recommends apt-transport-https \
