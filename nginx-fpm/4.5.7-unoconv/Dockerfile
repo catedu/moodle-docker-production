@@ -1,5 +1,5 @@
 
-FROM php:8.1-fpm
+FROM php:8.1-fpm-bookworm
 LABEL MAINTAINER juanda <juandacorreo@gmail.com>
 
 ARG VERSION=4.5.7
