@@ -1,4 +1,4 @@
-# moodle-docker-production: Docker Containers for Moodle
+# Moodle-docker-production: Docker Containers for Moodle
 
 This repository contains Docker configuration aimed to provide a good starting point to install moodle in production using docker.
 
