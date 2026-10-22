@@ -69,21 +69,25 @@ RUN	echo "Installing composer"; \
 	chmod +x ./composer.phar; \
 	mv ./composer.phar /usr/local/bin/composer
 
-# RUN	echo "Installing moosh"; \
-# 	cd /usr/src; \
-# 	git clone https://github.com/tmuras/moosh.git; \
-# 	cd moosh; \
-# 	composer install; \
-# 	ln -s /usr/src/moosh/moosh.php /usr/local/bin/moosh
+ARG MOOSH_REF=23ad80d6d6a44b3138780ca7958e76661fca60c8
 
-RUN	echo "Installing moosh"; \
+RUN	set -e; \
+	echo "Installing moosh"; \
 	cd /usr/src; \
-	curl -o moosh.zip -fSL "https://moodle.org/plugins/download.php/36861/moosh_moodle50_2025071502.zip"; \
-	unzip moosh.zip; \
+	git clone https://github.com/tmuras/moosh.git; \
 	cd moosh; \
+	git checkout "${MOOSH_REF}"; \
 	composer install; \
-	ln -s /usr/src/moosh/moosh.php /usr/local/bin/moosh; \
-	rm ../moosh.zip
+	ln -s /usr/src/moosh/moosh.php /usr/local/bin/moosh
+
+#RUN	echo "Installing moosh"; \
+#	cd /usr/src; \
+#	curl -o moosh.zip -fSL "https://moodle.org/plugins/download.php/36861/moosh_moodle50_2025071502.zip"; \
+#	unzip moosh.zip; \
+#	cd moosh; \
+#	composer install; \
+#	ln -s /usr/src/moosh/moosh.php /usr/local/bin/moosh; \
+#	rm ../moosh.zip
 
 RUN	echo "Installing unoconv"; \
 	# apt-get update && apt-get install -y; \
